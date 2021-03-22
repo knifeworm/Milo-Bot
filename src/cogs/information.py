@@ -1,5 +1,8 @@
-import discord
+import discord, datetime, time
 from discord.ext import commands
+
+start_time = time.time()
+
 
 class information(commands.Cog):
     def __init__(self, bot):
@@ -42,6 +45,13 @@ class information(commands.Cog):
             embed.add_field(name="Hashtag", value=f"{member.discriminator}", inline=False)
             embed.add_field(name="Nickname", value=f"{member.nick}", inline=False)
             await ctx.send(embed = embed)
+
+    @commands.command()
+    async def uptime(self, ctx):
+        current_time = time.time()
+        difference = int(round(current_time - start_time))
+        text = str(datetime.timedelta(seconds=difference))
+        await ctx.send(f"Woof woof - I have been online for {text}")
 
 def setup(bot):
     bot.add_cog(information(bot))
