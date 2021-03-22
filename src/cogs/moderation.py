@@ -1,5 +1,8 @@
 import discord
+
 from discord.ext import commands
+
+import json
 
 class moderation(commands.Cog):
     def __init__(self, bot):
@@ -101,6 +104,16 @@ class moderation(commands.Cog):
             await member.remove_roles(role)
         else:
             await ctx.send(f"Woof woof - {member} is not muted!")
+    
+    @commands.command()
+    @commands.has_guild_permissions(mute_members=True)
+    async def warn(self, ctx, member : discord.Member, *, reason=None):
+        embed = discord.Embed(title = "Warn", color = 0xFF0000)
+        embed.add_field(name = "Member Warned", value = f"{member}", inline = False)
+        embed.add_field(name = "Staff Member", value = f"{ctx.author}", inline = False)
+        embed.add_field(name = "Reason", value = f"{reason}", inline = False)
+        await ctx.send(embed = embed)
+
             
 def setup(bot):
     bot.add_cog(moderation(bot))
