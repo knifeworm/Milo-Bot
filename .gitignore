@@ -1,2 +1,3 @@
-# discord developer portal stuff
-secret.py
+bot_config/secrets.json
+bot_config/blacklist.json
+bot_config/config.json
